@@ -1,78 +1,51 @@
 console.log("=========================")
-console.log("Задача 2. Користувачі з другом")
+console.log("Задача 2. Склад")
 console.log("===========================")
 
-//TODO Напиши стрілочну функцію getUsersWithFriend(users, friendName) , яка прийматиме два параметра:
+//TODO Створи клас Storage, який створюватиме об'єкти для управління складом товарів. Клас очікує лише один аргумент — початковий масив товарів, який записується до створеного об'єкта в приватну властивість items.
 
-//TODO users — масив об’єктів користувачів
-//TODO friendName — ім’я друга для пошуку.
+//TODO Оголоси наступні методи класу:
 
-//TODO Функція має повертати масив усіх користувачів із масиву users, у яких є друг з іменем friendName. Друзі кожного користувача зберігаються у властивості friends. Якщо користувачів, у яких є такий других немає, то функція має повернути порожній масив.
+//TODO getItems() — повертає масив поточних товарів у приватній властивості items.
+//TODO addItem(newItem) — приймає новий товар newItem і додає його до масиву товарів у приватну властивість items об'єкта.
+//TODO removeItem(itemToRemove) — приймає рядок з назвою товару itemToRemove і видаляє його з масиву товарів у приватній властивості items об'єкта.
 
-//TODO Поради:
+class Storage {
+    #items;
 
-//TODO Метод filter() можна використовувати для створення нового масиву з елементами, які задовольняють певну умову.
-//TODO Використовуй метод includes() для перевірки, чи масив friends містить friendName.
+    constructor(newStorage) {
+        this.#items = newStorage;
+      }
 
+    getItems() {
+        return this.#items;
+    }
 
-const getUsersWithFriend = (users, friendName) => users.filter(user => user.friends.includes(friendName));
+    addItem(newItem) {
+        this.#items.push(newItem);
+    }
 
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи.
-// У консоль будуть виведені результати її роботи.
+    removeItem(itemToRemove) {
+            const findIndexToRemove = this.#items.indexOf(itemToRemove);
+        
+            if (findIndexToRemove !== -1) {
+              this.#items.splice(findIndexToRemove, 1);
+              return this.#items;
+            }
+    }
+}
 
-const allUsers = [
-  {
-    name: "Moore Hensley",
-    friends: ["Sharron Pace"]
-  },
-  {
-    name: "Sharlene Bush",
-    friends: ["Briana Decker", "Sharron Pace"]
-  },
-  {
-    name: "Ross Vazquez",
-    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"]
-  },
-  {
-    name: "Elma Head",
-    friends: ["Goldie Gentry", "Aisha Tran"]
-  },
-  {
-    name: "Carey Barr",
-    friends: ["Jordan Sampson", "Eddie Strong"]
-  },
-  {
-    name: "Blackburn Dotson",
-    friends: ["Jacklyn Lucas", "Linda Chapman"]
-  },
-  {
-    name: "Sheree Anthony",
-    friends: ["Goldie Gentry", "Briana Decker"]
-  }
-];
+//* Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його після оголошення класу для перевірки коректності роботи. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там не змінюй.
 
-console.log(getUsersWithFriend(allUsers, "Briana Decker")); 
-// [
-//   {
-//     name: "Sharlene Bush",
-//     friends: ["Briana Decker", "Sharron Pace"]
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"]
-//   }
-// ]
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
 
-console.log(getUsersWithFriend(allUsers, "Goldie Gentry"));
-// [
-//   {
-//     name: "Elma Head",
-//     friends: ["Goldie Gentry", "Aisha Tran"]
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"]
-//   }
-// ]
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
 
-console.log(getUsersWithFriend(allUsers, "Adrian Cross" )); // []
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+const storage1 = new Storage([])
+const storage2 = new Storage(["Kyiv", "Lviv"])
+
